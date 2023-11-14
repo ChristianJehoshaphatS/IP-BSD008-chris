@@ -5,6 +5,7 @@ const authenticate = require("../middlewares/authentication");
 
 router.post("/login", UserController.login);
 router.post("/register", UserController.register);
+router.post("/google-auth", UserController.Googlelogin);
 
 router.use(authenticate);
 router.get("/recipe", MainController.searchRecipe);

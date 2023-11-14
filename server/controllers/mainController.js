@@ -50,7 +50,7 @@ class MainController {
 				userId,
 			});
 			console.log(savePocket);
-			res.status(201).json({message: `Recipe aved to GetPocket!`});
+			res.status(201).json({message: `Recipe saved to GetPocket!`});
 		} catch (error) {
 			next(error);
 		}

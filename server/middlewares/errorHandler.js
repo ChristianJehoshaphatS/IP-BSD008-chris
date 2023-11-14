@@ -4,6 +4,11 @@ const errorHandler = (error, req, res, next) => {
 	let errors;
 	console.log(error);
 
+	if (error.stack) {
+		code = 400;
+		message = "Validation Error";
+	}
+
 	if (error.name == "SequelizeValidationError") {
 		code = 400;
 		message = "Validation Error";
@@ -29,10 +34,6 @@ const errorHandler = (error, req, res, next) => {
 		code = 401;
 		message = "Invalid Token";
 	}
-	if (error.message === "No File Inserted") {
-		code = 401;
-		message = "No File Inserted";
-	}
 	if (error.name == "SequelizeForeignKeyConstraintError") {
 		code = 401;
 		message = "Foreign Key Error";
@@ -40,21 +41,6 @@ const errorHandler = (error, req, res, next) => {
 	if (error.message == "Unauthorized") {
 		code = 403;
 		message = "No Access";
-	}
-
-	if (error.message == "Job Not Found") {
-		code = 404;
-		message = "Job Not Found";
-	}
-
-	if (error.message == "Company Not Found") {
-		code = 404;
-		message = "Company Not Found";
-	}
-
-	if (error.message == "Jobs Not Found") {
-		code = 404;
-		message = "Jobs Not Found";
 	}
 
 	if (error.message == "User Not Found") {
