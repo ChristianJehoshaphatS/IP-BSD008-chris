@@ -1,0 +1,68 @@
+const errorHandler = (error, req, res, next) => {
+	let code = 500;
+	let message = "Internal Server Error";
+	let errors;
+	console.log(error);
+
+	if (error.name == "SequelizeValidationError") {
+		code = 400;
+		message = "Validation Error";
+		errors = error.errors.map((el) => el.message);
+	}
+	if (error.name == "SequelizeUniqueConstraintError") {
+		code = 400;
+		message = "Unique Constraint Error";
+	}
+	if (error.name == "SequelizeDatabaseError") {
+		code = 400;
+		message = "Sequelize Database Error";
+	}
+	if (error.message == "Invalid email/password") {
+		code = 401;
+		message = "Invalid email/password";
+	}
+	if (error.message == "emptyLogin") {
+		code = 401;
+		message = "Email or Password is empty";
+	}
+	if (error.message == "Invalid Token") {
+		code = 401;
+		message = "Invalid Token";
+	}
+	if (error.message === "No File Inserted") {
+		code = 401;
+		message = "No File Inserted";
+	}
+	if (error.name == "SequelizeForeignKeyConstraintError") {
+		code = 401;
+		message = "Foreign Key Error";
+	}
+	if (error.message == "Unauthorized") {
+		code = 403;
+		message = "No Access";
+	}
+
+	if (error.message == "Job Not Found") {
+		code = 404;
+		message = "Job Not Found";
+	}
+
+	if (error.message == "Company Not Found") {
+		code = 404;
+		message = "Company Not Found";
+	}
+
+	if (error.message == "Jobs Not Found") {
+		code = 404;
+		message = "Jobs Not Found";
+	}
+
+	if (error.message == "User Not Found") {
+		code = 404;
+		message = "Jobs Not Found";
+	}
+
+	res.status(code).json({message, errors});
+};
+
+module.exports = errorHandler;
