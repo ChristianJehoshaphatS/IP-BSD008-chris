@@ -10,7 +10,7 @@ const authenticate = async (req, res, next) => {
 		const token = auth.split(" ")[1];
 		const data = verifyToken(token);
 		console.log(data, "<<<<<<<<<<");
-		if (data == null) {
+		if (!data.userId) {
 			throw new Error("Invalid Token");
 		}
 		const verified = await User.findOne({where: {id: data.userId}});

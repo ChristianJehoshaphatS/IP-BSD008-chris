@@ -15,7 +15,6 @@ class MainController {
 			);
 			res.status(200).json(response.data);
 		} catch (error) {
-			console.log(error);
 			next(error);
 		}
 	}
@@ -35,6 +34,7 @@ class MainController {
 			console.log(saveRecipe);
 			res.status(201).json({message: `${title} has been saved to favorites!`});
 		} catch (error) {
+			console.log(error);
 			next(error);
 		}
 	}

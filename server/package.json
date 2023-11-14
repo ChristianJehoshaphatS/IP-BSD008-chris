@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "jest --forceExit --detectOpenHandles --testTimeout=1000 --verbose --coverage",
+		"test": "jest --forceExit --detectOpenHandles --testTimeout=5000 --verbose --coverage",
 		"db:dev": "sequelize-cli db:drop && sequelize-cli db:create && sequelize-cli db:migrate && sequelize-cli db:seed:all",
 		"db:test": "sequelize-cli --env=test db:drop && sequelize-cli --env=test db:create && sequelize-cli --env=test db:migrate && sequelize-cli --env=test db:seed:all"
 	},

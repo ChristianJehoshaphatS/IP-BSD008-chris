@@ -18,10 +18,7 @@ const errorHandler = (error, req, res, next) => {
 		code = 400;
 		message = "Unique Constraint Error";
 	}
-	if (error.name == "SequelizeDatabaseError") {
-		code = 400;
-		message = "Sequelize Database Error";
-	}
+
 	if (error.message == "Invalid email/password") {
 		code = 401;
 		message = "Invalid email/password";
@@ -34,10 +31,11 @@ const errorHandler = (error, req, res, next) => {
 		code = 401;
 		message = "Invalid Token";
 	}
-	if (error.name == "SequelizeForeignKeyConstraintError") {
+	if (error.name == "JsonWebTokenError") {
 		code = 401;
-		message = "Foreign Key Error";
+		message = "Invalid Token";
 	}
+
 	if (error.message == "Unauthorized") {
 		code = 403;
 		message = "No Access";
@@ -45,7 +43,7 @@ const errorHandler = (error, req, res, next) => {
 
 	if (error.message == "User Not Found") {
 		code = 404;
-		message = "Jobs Not Found";
+		message = "User Not Found";
 	}
 
 	res.status(code).json({message, errors});
