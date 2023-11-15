@@ -4,6 +4,7 @@ const {Favorite, Pocket} = require("../models");
 class MainController {
 	static async searchRecipe(req, res, next) {
 		try {
+			console.log(req.query);
 			const {query} = req.query;
 			const response = await axios.get(
 				`https://api.api-ninjas.com/v1/recipe?query=${query}`,
@@ -19,8 +20,23 @@ class MainController {
 		}
 	}
 
+	static async getRecipe(req, res, next) {
+		try {
+			console.log(req.loginInfo);
+			const userId = req.loginInfo.id;
+			console.log(userId, ">>>>>>>>>>>>>>>>>");
+			const favoriteRecipes = await Favorite.findAll({where: {userId}});
+			console.log(favoriteRecipes);
+			res.status(200).json(favoriteRecipes);
+		} catch (error) {
+			console.log(error);
+			next(error);
+		}
+	}
+
 	static async saveRecipe(req, res, next) {
 		try {
+			console.log(req.body);
 			const {title, ingredients, instructions, servings} = req.body;
 			const userId = req.loginInfo.id;
 			console.log(userId, ">>>>>>>>>>>>>>>>>");

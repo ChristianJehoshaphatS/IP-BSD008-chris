@@ -18,7 +18,7 @@ module.exports = {
 				},
 			},
 			ingredients: {
-				type: Sequelize.STRING,
+				type: Sequelize.TEXT,
 				allowNull: false,
 				validate: {
 					notEmpty: {msg: "ingredients cannot be empty"},
@@ -26,7 +26,7 @@ module.exports = {
 				},
 			},
 			instructions: {
-				type: Sequelize.STRING,
+				type: Sequelize.TEXT,
 				allowNull: false,
 				validate: {
 					notEmpty: {msg: "instructions cannot be empty"},

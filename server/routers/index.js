@@ -9,6 +9,7 @@ router.post("/google-auth", UserController.Googlelogin);
 
 router.use(authenticate);
 router.get("/recipe", MainController.searchRecipe);
+router.get("/favorite", MainController.getRecipe);
 router.post("/favorite", MainController.saveRecipe);
 router.post("/pocket", MainController.saveGetPocketCredentials);
 

@@ -7,13 +7,14 @@ const authenticate = async (req, res, next) => {
 		if (!auth) {
 			throw new Error("Unauthorized");
 		}
+		console.log(auth);
 		const token = auth.split(" ")[1];
 		const data = verifyToken(token);
 		console.log(data, "<<<<<<<<<<");
-		if (!data.userId) {
+		if (!data.email) {
 			throw new Error("Invalid Token");
 		}
-		const verified = await User.findOne({where: {id: data.userId}});
+		const verified = await User.findOne({where: {email: data.email}});
 		if (!verified) {
 			throw new Error("User Not Found");
 		}

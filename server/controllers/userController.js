@@ -50,7 +50,7 @@ class UserController {
 			} else {
 				throw new Error("Invalid email/password");
 			}
-			res.status(200).json({access_token: token});
+			res.status(200).json({access_token: token, name: payload.username});
 		} catch (error) {
 			next(error);
 		}
@@ -74,6 +74,7 @@ class UserController {
 			// const domain = payload['hd'];
 
 			//FIND OR CREATE sequelize
+			// console.log(payload);
 			const [user, created] = await User.findOrCreate({
 				where: {
 					email: payload.email,
@@ -81,13 +82,13 @@ class UserController {
 				defaults: {
 					email: payload.email,
 					password: "password_google",
-					username: "google_user",
+					username: payload.name,
 				},
 				hooks: false,
 			});
 
 			const access_token = signToken({email: user.email});
-			res.status(200).json(access_token);
+			res.status(200).json({access_token, name: payload.name});
 		} catch (error) {
 			next(error);
 		}
