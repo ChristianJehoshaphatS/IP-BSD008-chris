@@ -72,6 +72,7 @@ class MainController {
 		try {
 			const {id} = req.params;
 			const {title, ingredients, instructions, servings} = req.body;
+			console.log(title, ingredients, instructions, servings);
 			const userId = req.loginInfo.id;
 
 			const findRecipe = await Favorite.findOne({where: {id}});
