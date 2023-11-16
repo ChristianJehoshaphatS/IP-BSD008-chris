@@ -10,10 +10,9 @@ const RecipeDetail = () => {
 		document.title = recipe.title;
 	}, []);
 
-	const navigate = useNavigate();
-
 	const id = useParams();
 	console.log(id);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchRecipe = async () => {
