@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {PocketContext, RecipeContext} from "../contexts";
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 const RecipeDetail = () => {
 	const {recipe, setRecipe} = useContext(RecipeContext);
@@ -9,6 +9,8 @@ const RecipeDetail = () => {
 	useEffect(() => {
 		document.title = recipe.title;
 	}, []);
+
+	const navigate = useNavigate();
 
 	const id = useParams();
 	console.log(id);
@@ -349,23 +351,34 @@ const RecipeDetail = () => {
 					))}
 				</h1>
 				<br />
-				<button
-					className="btn w-2/5 sm:w-4/12 lg:w-2/12 bg-red-700 text-white"
-					onClick={() => {
-						handleSpeech(stepIndex);
-						setStepIndex(stepIndex + 1);
-						if (stepIndex == steps.length - 1) {
-							setStepIndex(0);
-						}
-					}}
-				>
-					Listen
-				</button>
-				<br />
-				<br />
-				<div className="flex gap-2">
+				<div className="flex gap-4">
 					<button
-						className="btn btn-outline w-3/5 sm:w-2/5 lg:w-1/5 btn-error"
+						className="btn w-2/5 sm:w-4/12 lg:w-2/12 bg-red-700 text-white"
+						onClick={() => {
+							navigate(`/edit/${recipe.id}`);
+						}}
+					>
+						Modify
+					</button>
+					<button
+						className="btn w-2/5 sm:w-4/12 lg:w-2/12 bg-red-700 text-white"
+						onClick={() => {
+							handleSpeech(stepIndex);
+							setStepIndex(stepIndex + 1);
+							if (stepIndex == steps.length - 1) {
+								setStepIndex(0);
+							}
+						}}
+					>
+						Listen
+					</button>
+				</div>
+
+				<br />
+				<br />
+				<div className="flex gap-4">
+					<button
+						className="btn btn-outline w-2/5 sm:w-4/12 lg:w-2/12 btn-error"
 						onClick={saveFavorite}
 					>
 						<span className="text-3xl">♡</span> Add to Favorites

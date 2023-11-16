@@ -2,7 +2,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {RecipeContext} from "../contexts";
 import {useContext} from "react";
 
-const RecipeCard = ({recipeSingle}) => {
+const RecipeCard = ({recipeSingle, del, handleUnfav}) => {
 	const navigate = useNavigate();
 	const {recipe, setRecipe} = useContext(RecipeContext);
 
@@ -13,10 +13,22 @@ const RecipeCard = ({recipeSingle}) => {
 					<h2 className="card-title">{recipeSingle.title}</h2>
 					<p>Servings: {recipeSingle.servings}</p>
 					<div className="card-actions justify-end">
+						{del && (
+							<button
+								className="btn bg-slate-800 text-white"
+								onClick={() => handleUnfav(recipeSingle.id)}
+							>
+								Unfavorite
+							</button>
+						)}
 						<button
 							className="btn bg-red-700 text-white border-0"
 							onClick={() => {
-								navigate(`/detail/${recipeSingle.id}`);
+								if (recipeSingle.id) {
+									navigate(`/detail/${recipeSingle.id}`);
+								} else {
+									navigate(`/detail/${recipeSingle.title}`);
+								}
 
 								setRecipe(recipeSingle);
 							}}
