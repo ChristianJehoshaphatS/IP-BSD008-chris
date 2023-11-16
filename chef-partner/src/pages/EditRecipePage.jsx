@@ -57,7 +57,7 @@ const EditRecipe = () => {
 			}
 		);
 		console.log(data);
-		// navigate(`/detail/${id.recipe}`);
+		navigate(`/detail/${id.recipe}`);
 	};
 
 	return (
