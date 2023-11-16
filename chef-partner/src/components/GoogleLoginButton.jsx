@@ -5,7 +5,7 @@ const GoogleLoginButton = () => {
 	const navigate = useNavigate();
 	async function googleLogin(codeResponse) {
 		try {
-			// console.log(codeResponse);
+			console.log(codeResponse);
 			const {data} = await axios.post(
 				`${import.meta.env.VITE_SERVER_URL}google-auth`,
 				null,
