@@ -298,7 +298,7 @@ const RecipeDetail = () => {
 				console.log(data);
 			} else {
 				// const redirect_uri = `http://localhost:5173/detail/${id.recipe}`;
-				const redirect_uri = `https://w4zf1p6s-5173.asse.devtunnels.ms/authPocket`;
+				const redirect_uri = `https://chef-partner.vercel.app/authPocket`;
 
 				const {data} = await axios.post(
 					`${import.meta.env.VITE_SERVER_URL}pocketCode`,

@@ -33,7 +33,11 @@ const PocketLogin = () => {
 	}, []);
 	return (
 		<>
-			<h1>Regirecting you back to Chef-Partner</h1>
+			<section className="bg-[#FFF5EA] h-full min-h-[100dvh] flex flex-col items-center w-full py-10">
+				<h1 className="text-4xl text-red-700">
+					Redirecting you back to Chef-Partner
+				</h1>
+			</section>
 		</>
 	);
 };
