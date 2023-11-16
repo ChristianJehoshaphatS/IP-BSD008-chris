@@ -1,16 +1,15 @@
-import {useState} from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import axios from "axios";
-import GoogleLoginButton from "./components/GoogleLoginButton";
+import {RouterProvider} from "react-router-dom";
+import router from "./routers";
+import {PocketProvider, RecipeProvider} from "./contexts";
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
 		<>
-			<GoogleLoginButton />
+			<PocketProvider>
+				<RecipeProvider>
+					<RouterProvider router={router} />
+				</RecipeProvider>
+			</PocketProvider>
 		</>
 	);
 }

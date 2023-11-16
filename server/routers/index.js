@@ -9,7 +9,13 @@ router.post("/google-auth", UserController.Googlelogin);
 
 router.use(authenticate);
 router.get("/recipe", MainController.searchRecipe);
+router.get("/favorite", MainController.getRecipe);
+
 router.post("/favorite", MainController.saveRecipe);
+router.get("/favorite/:id", MainController.getRecipeDetail);
+router.post("/pocketCode", MainController.getPocketCode);
+router.post("/pocketAuthorize", MainController.authorizePocket);
+
 router.post("/pocket", MainController.saveGetPocketCredentials);
 
 module.exports = router;

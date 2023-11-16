@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 				},
 			},
 			ingredients: {
-				type: DataTypes.STRING,
+				type: DataTypes.TEXT,
 				allowNull: false,
 				validate: {
 					notEmpty: {msg: "ingredients cannot be empty"},
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
 				},
 			},
 			instructions: {
-				type: DataTypes.STRING,
+				type: DataTypes.TEXT,
 				allowNull: false,
 				validate: {
 					notEmpty: {msg: "instructions cannot be empty"},
