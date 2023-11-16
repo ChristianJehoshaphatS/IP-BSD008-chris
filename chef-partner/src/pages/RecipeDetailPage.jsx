@@ -1,9 +1,33 @@
 import {useContext, useEffect, useState} from "react";
-import {RecipeContext} from "../contexts";
+import {PocketContext, RecipeContext} from "../contexts";
 import axios from "axios";
+import {useParams} from "react-router-dom";
 
 const RecipeDetail = () => {
 	const {recipe, setRecipe} = useContext(RecipeContext);
+
+	useEffect(() => {
+		document.title = recipe.title;
+	}, []);
+
+	const id = useParams();
+	console.log(id);
+
+	useEffect(() => {
+		const fetchRecipe = async () => {
+			const {data} = await axios.get(
+				`${import.meta.env.VITE_SERVER_URL}favorite/${id.recipe}`,
+				{
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+					},
+				}
+			);
+			console.log(data);
+			setRecipe(data);
+		};
+		fetchRecipe();
+	}, []);
 
 	console.log(recipe);
 	function sortAndFormatIngredients(ingredientsList) {
@@ -246,6 +270,58 @@ const RecipeDetail = () => {
 	const handleSpeech = (index) => {
 		speak(steps[index]);
 	};
+	const {access, setAccess} = useContext(PocketContext);
+
+	const handlePocketSave = async () => {
+		const currentUrl = window.location.href;
+		try {
+			if (localStorage.getItem("pocketAccessToken")) {
+				const {data} = await axios.post(
+					`${import.meta.env.VITE_SERVER_URL}pocket`,
+					{
+						url: currentUrl,
+						title: recipe.title,
+						tags: "",
+						access_token: localStorage.getItem("pocketAccessToken"),
+					},
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+						},
+					}
+				);
+				console.log(data);
+			} else {
+				// const redirect_uri = `http://localhost:5173/detail/${id.recipe}`;
+				const redirect_uri = `https://w4zf1p6s-5173.asse.devtunnels.ms/authPocket`;
+
+				const {data} = await axios.post(
+					`${import.meta.env.VITE_SERVER_URL}pocketCode`,
+					{
+						redirect_uri,
+					},
+					{
+						headers: {
+							Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+							"Access-Control-Allow-Origin": "*",
+						},
+					}
+				);
+				console.log(data);
+				const request_token = data.split("=")[1];
+				localStorage.setItem("pocketCode", request_token);
+
+				window.open(
+					`https://getpocket.com/auth/authorize?request_token=${request_token}&redirect_uri=${redirect_uri}`
+				);
+
+				setAccess(request_token);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<>
 			<section className="bg-[#FFF5EA] h-full min-h-[100dvh] flex flex-col w-full p-10">
@@ -268,8 +344,9 @@ const RecipeDetail = () => {
 						</p>
 					))}
 				</h1>
+				<br />
 				<button
-					className="btn"
+					className="btn w-2/5 sm:w-4/12 lg:w-2/12 bg-red-700 text-white"
 					onClick={() => {
 						handleSpeech(stepIndex);
 						setStepIndex(stepIndex + 1);
@@ -291,7 +368,7 @@ const RecipeDetail = () => {
 					</button>
 					<button
 						className="btn btn-outline w-2/5 sm:w-4/12 lg:w-2/12 btn-error"
-						onClick={saveFavorite}
+						onClick={handlePocketSave}
 					>
 						<span className="text-3xl">♡</span> Add to Pocket
 					</button>

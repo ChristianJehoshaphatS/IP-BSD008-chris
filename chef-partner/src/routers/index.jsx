@@ -7,6 +7,7 @@ import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
 import Favorites from "../pages/FavoritesPage";
 import {googleLogout} from "@react-oauth/google";
+import PocketLogin from "../pages/PocketLoginPage";
 
 const router = createBrowserRouter([
 	{
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
 			{
 				path: "/edit/:recipe",
 				element: <EditRecipe />,
+			},
+			{
+				path: "/authPocket",
+				element: <PocketLogin />,
 			},
 		],
 		loader: () => {

@@ -2,6 +2,7 @@ import {useState} from "react";
 import {createContext} from "react";
 
 export const RecipeContext = createContext(); //kosong karena nanti mau pake provider, akan dianggap jadi sebuah componnt
+export const PocketContext = createContext();
 
 export const RecipeProvider = ({children}) => {
 	const [recipe, setRecipe] = useState({
@@ -16,5 +17,14 @@ export const RecipeProvider = ({children}) => {
 		<RecipeContext.Provider value={{recipe, setRecipe}}>
 			{children}
 		</RecipeContext.Provider>
+	);
+};
+
+export const PocketProvider = ({children}) => {
+	const [access, setAccess] = useState({});
+	return (
+		<PocketContext.Provider value={{access, setAccess}}>
+			{children}
+		</PocketContext.Provider>
 	);
 };
