@@ -66,7 +66,7 @@ const Home = () => {
 
 	return (
 		<>
-			<section className="bg-[#FFF5EA] h-full min-h-[100dvh] flex flex-col items-center w-full 	">
+			<section className="bg-[#FFF5EA] h-full min-h-[100dvh] flex flex-col items-center w-full py-10">
 				<div className="mb-3 w-5/6 sm:w-2/3 my-5">
 					<h1 className="text-red-700 text-xl mb-2">Find Recipes</h1>
 					<div className="relative mb-4 flex w-full flex-wrap items-stretch">

@@ -33,10 +33,10 @@ const Favorites = () => {
 
 	return (
 		<>
-			<section className="bg-[#FFF5EA] h-full min-h-[100dvh] flex flex-col items-center w-full 	">
+			<section className="bg-[#FFF5EA] h-full min-h-[100dvh] flex flex-col items-center w-full py-10">
 				<br />
 
-				<h1 className="text-4xl text-red-700">
+				<h1 className="text-4xl text-red-700 text-center mx-4">
 					{localStorage.getItem("username")}'s Favorites
 				</h1>
 				<br />
