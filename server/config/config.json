@@ -1,0 +1,23 @@
+{
+	"development": {
+		"username": "postgres",
+		"password": "pgadmin24",
+		"database": "chef_dev",
+		"host": "127.0.0.1",
+		"dialect": "postgres"
+	},
+	"test": {
+		"username": "postgres",
+		"password": "pgadmin24",
+		"database": "chef_test",
+		"host": "127.0.0.1",
+		"dialect": "postgres"
+	},
+	"production": {
+		"username": "postgres",
+		"password": "pgadmin24",
+		"database": "chef_partner",
+		"host": "127.0.0.1",
+		"dialect": "postgres"
+	}
+}
