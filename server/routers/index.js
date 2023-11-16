@@ -13,6 +13,9 @@ router.get("/favorite", MainController.getRecipe);
 
 router.post("/favorite", MainController.saveRecipe);
 router.get("/favorite/:id", MainController.getRecipeDetail);
+router.put("/favorite/:id", MainController.EditRecipe);
+router.delete("/favorite/:id", MainController.deleteRecipe);
+
 router.post("/pocketCode", MainController.getPocketCode);
 router.post("/pocketAuthorize", MainController.authorizePocket);
 
