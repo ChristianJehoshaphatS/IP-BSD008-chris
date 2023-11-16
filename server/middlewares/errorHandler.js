@@ -46,6 +46,11 @@ const errorHandler = (error, req, res, next) => {
 		message = "User Not Found";
 	}
 
+	if (error.message == "Recipe Not Found") {
+		code = 404;
+		message = "Recipe Not Found";
+	}
+
 	res.status(code).json({message, errors});
 };
 

@@ -190,6 +190,10 @@ const RecipeDetail = () => {
 	function isMeatProduct(ingredientName) {
 		const meatProductKeywords = [
 			"chicken",
+			"hare",
+			"meat",
+			"egg",
+			"mutton",
 			"beef",
 			"pork",
 			"lamb",

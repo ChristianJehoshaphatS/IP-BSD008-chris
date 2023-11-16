@@ -34,6 +34,16 @@ beforeAll(async () => {
 					createdAt: "2023-11-10",
 					updatedAt: "2023-11-10",
 				},
+				{
+					title: "test2",
+					ingredients: "123",
+					instructions: "chris252@mail.com",
+					servings: "chris252@mail.com",
+					userId: 1,
+
+					createdAt: "2023-11-10",
+					updatedAt: "2023-11-10",
+				},
 			],
 			{}
 		);
@@ -244,8 +254,131 @@ describe("GET /favorite/:id", () => {
 				.get("/favorite/50")
 				.set("Authorization", `Bearer ${access_token}`);
 			console.log(response.body);
+			expect(response.status).toBe(404);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+	});
+});
+
+describe("PUT /favorite/:id", () => {
+	describe("PUT /favorite/:id - Succeed", () => {
+		it("should return an object", async () => {
+			const body = {
+				title: "aaa",
+			};
+			const response = await request(app)
+				.put("/favorite/1")
+				.send(body)
+				.set("Authorization", `Bearer ${access_token}`);
+
 			expect(response.status).toBe(200);
-			expect(response.body).toBe(null);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+	});
+
+	describe("PUT /favorite/:id - Errors", () => {
+		it("should return an object with an Error message Unauthorized - empty headers", async () => {
+			const body = {
+				title: "aaa",
+			};
+			const response = await request(app)
+				.put("/favorite/1")
+				.send(body)
+				.set("sss", `Bearer ${access_token}`);
+
+			expect(response.status).toBe(403);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+
+		it("should return an object with an Error message Invalid Token empty data", async () => {
+			const payload2 = {};
+
+			let access_token2 = signToken(payload2);
+
+			const body = {
+				title: "aaa",
+			};
+			const response = await request(app)
+				.put("/favorite/1")
+				.send(body)
+				.set("Authorization", `Bearer ${access_token2}`);
+
+			expect(response.status).toBe(401);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+
+		it("should return an object with an Error message Recipe Not Found", async () => {
+			const body = {
+				title: "aaa",
+			};
+			const response = await request(app)
+				.put("/favorite/50")
+				.send(body)
+				.set("Authorization", `Bearer ${access_token}`);
+			console.log(response.body);
+			expect(response.status).toBe(404);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+	});
+});
+
+describe("DELETE /favorite/:id", () => {
+	describe("DELETE /favorite/:id - Succeed", () => {
+		it("should return an object", async () => {
+			const response = await request(app)
+				.delete("/favorite/1")
+				.set("Authorization", `Bearer ${access_token}`);
+
+			expect(response.status).toBe(200);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+	});
+
+	describe("DELETE /favorite/:id - Errors", () => {
+		it("should return an object with an Error message Unauthorized - empty headers", async () => {
+			const response = await request(app)
+				.delete("/favorite/2")
+
+				.set("sss", `Bearer ${access_token}`);
+
+			expect(response.status).toBe(403);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+
+		it("should return an object with an Error message Invalid Token empty data", async () => {
+			const payload2 = {};
+
+			let access_token2 = signToken(payload2);
+
+			const response = await request(app)
+				.delete("/favorite/2")
+
+				.set("Authorization", `Bearer ${access_token2}`);
+
+			expect(response.status).toBe(401);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+
+		it("should return an object with an Error message Recipe Not Found", async () => {
+			const body = {
+				title: "aaa",
+			};
+			const response = await request(app)
+				.delete("/favorite/50")
+				.send(body)
+				.set("Authorization", `Bearer ${access_token}`);
+			console.log(response.body);
+			expect(response.status).toBe(404);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("message", expect.any(String));
 		});
 	});
 });
