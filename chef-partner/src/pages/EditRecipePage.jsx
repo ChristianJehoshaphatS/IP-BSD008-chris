@@ -81,6 +81,7 @@ const EditRecipe = () => {
 						type="text"
 						name="servings"
 						id=""
+						onChange={handleChange}
 						value={edit.servings}
 						className="input input-bordered input-error w-full max-w-xs bg-white place text-red-700"
 					/>
@@ -89,6 +90,7 @@ const EditRecipe = () => {
 						type="text"
 						name="ingredients"
 						id=""
+						onChange={handleChange}
 						value={edit.ingredients}
 						className="input input-bordered input-error w-full max-w-xs bg-white place text-red-700"
 					/>
@@ -97,6 +99,7 @@ const EditRecipe = () => {
 						type="text"
 						name="instructions"
 						id=""
+						onChange={handleChange}
 						value={edit.instructions}
 						className="input input-bordered input-error w-full max-w-xs bg-white place text-red-700"
 					/>
