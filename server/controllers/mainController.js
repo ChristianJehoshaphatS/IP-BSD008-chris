@@ -36,6 +36,11 @@ class MainController {
 			const {id} = req.params;
 			console.log(id, ">>>>>>>>>>");
 			const favoriteRecipe = await Favorite.findOne({where: {id}});
+
+			if (!favoriteRecipe) {
+				throw new Error("Recipe Not Found");
+			}
+
 			res.status(200).json(favoriteRecipe);
 		} catch (error) {
 			console.log(error);
@@ -57,6 +62,53 @@ class MainController {
 				userId,
 			});
 			res.status(201).json({message: `${title} has been saved to favorites!`});
+		} catch (error) {
+			console.log(error);
+			next(error);
+		}
+	}
+
+	static async EditRecipe(req, res, next) {
+		try {
+			const {id} = req.params;
+			const {title, ingredients, instructions, servings} = req.body;
+			const userId = req.loginInfo.id;
+
+			const findRecipe = await Favorite.findOne({where: {id}});
+
+			if (!findRecipe) {
+				throw new Error("Recipe Not Found");
+			}
+
+			const updateRecipe = await Favorite.update(
+				{
+					title,
+					ingredients,
+					instructions,
+					servings,
+					userId,
+				},
+				{where: {id}}
+			);
+			res.status(200).json({message: `The recipe has been Updated!`});
+		} catch (error) {
+			console.log(error);
+			next(error);
+		}
+	}
+
+	static async deleteRecipe(req, res, next) {
+		try {
+			const {id} = req.params;
+
+			const findRecipe = await Favorite.findOne({where: {id}});
+
+			if (!findRecipe) {
+				throw new Error("Recipe Not Found");
+			}
+
+			const deletedRecipe = await Favorite.destroy({where: {id}});
+			res.status(200).json({message: `The recipe has been Deleted!`});
 		} catch (error) {
 			console.log(error);
 			next(error);
