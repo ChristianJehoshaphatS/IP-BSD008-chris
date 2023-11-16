@@ -276,6 +276,7 @@ const RecipeDetail = () => {
 		speak(steps[index]);
 	};
 	const {access, setAccess} = useContext(PocketContext);
+	const [pocketMessage, setPocketMessage] = useState();
 
 	const handlePocketSave = async () => {
 		const currentUrl = window.location.href;
@@ -296,6 +297,7 @@ const RecipeDetail = () => {
 					}
 				);
 				console.log(data);
+				setPocketMessage(data.message);
 			} else {
 				// const redirect_uri = `http://localhost:5173/detail/${id.recipe}`;
 				const redirect_uri = `https://chef-partner.vercel.app/authPocket`;
@@ -375,6 +377,9 @@ const RecipeDetail = () => {
 
 				<br />
 				<br />
+				{pocketMessage && (
+					<h1 className="text-red-700 text-2xl">{pocketMessage}</h1>
+				)}
 				<div className="flex gap-4">
 					<button
 						className="btn btn-outline w-2/5 sm:w-4/12 lg:w-2/12 btn-error"
