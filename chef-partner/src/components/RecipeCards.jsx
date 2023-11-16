@@ -16,13 +16,9 @@ const RecipeCard = ({recipeSingle}) => {
 						<button
 							className="btn btn-primary"
 							onClick={() => {
-								navigate(`/detail/${recipeSingle.title}`);
-								console.log(recipe, "before");
-								console.log(recipeSingle);
+								navigate(`/detail/${recipeSingle.id}`);
+
 								setRecipe(recipeSingle);
-								setTimeout(() => {
-									console.log(recipe, "after");
-								}, 1000);
 							}}
 						>
 							View Recipe

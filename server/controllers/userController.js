@@ -44,6 +44,7 @@ class UserController {
 			const payload = {
 				userId: id,
 				username,
+				email: foundUser.email,
 			};
 			if (auth) {
 				token = signToken(payload);

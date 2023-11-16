@@ -23,6 +23,7 @@ beforeAll(async () => {
 	const payload = {
 		userId: 1,
 		username: "test",
+		email: "chris252@mail.com",
 	};
 
 	access_token = signToken(payload);
@@ -87,6 +88,7 @@ describe("GET /searchRecipe", () => {
 			const payload2 = {
 				userId: 12,
 				username: "test",
+				email: "chris25@mail.com",
 			};
 
 			access_token = signToken(payload2);
