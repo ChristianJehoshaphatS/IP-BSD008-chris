@@ -8,7 +8,7 @@ const RecipeCard = ({recipeSingle, del, handleUnfav}) => {
 
 	return (
 		<>
-			<div className="card w-72 sm:w-96 h-52 bg-white shadow-xl">
+			<div className="card w-72 sm:w-96 h-96 sm:h-72 bg-white shadow-xl">
 				<div className="card-body text-red-700">
 					<h2 className="card-title">{recipeSingle.title}</h2>
 					<p>Servings: {recipeSingle.servings}</p>
