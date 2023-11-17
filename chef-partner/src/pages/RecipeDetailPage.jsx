@@ -374,21 +374,22 @@ const RecipeDetail = () => {
 						Listen
 					</button>
 				</div>
-
 				<br />
+				<hr />
 				<br />
 				{pocketMessage && (
 					<h1 className="text-red-700 text-2xl">{pocketMessage}</h1>
 				)}
+
 				<div className="flex gap-4">
 					<button
-						className="btn btn-outline w-2/5 sm:w-4/12 lg:w-2/12 btn-error"
+						className="btn btn-outline w-2/5 sm:w-4/12 lg:w-2/12 btn-error h-24 p-2 sm:h-14"
 						onClick={saveFavorite}
 					>
 						<span className="text-3xl">♡</span> Add to Favorites
 					</button>
 					<button
-						className="btn btn-outline w-2/5 sm:w-4/12 lg:w-2/12 btn-error"
+						className="btn btn-outline w-2/5 sm:w-4/12 lg:w-2/12 btn-error h-24 p-2 sm:h-14"
 						onClick={handlePocketSave}
 					>
 						<span className="text-3xl">♡</span> Add to Pocket
